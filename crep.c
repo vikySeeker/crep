@@ -23,7 +23,7 @@ int main(int arg_count, char **arg_array) {
 	}
 	opterr = 0;
 	int opt, count;
-	char *delim, *message;
+	char *delim="", *message;
 	while((opt = getopt(arg_count, arg_array, "d:c:h")) != -1) {
 		switch (opt) {
 			case 'd':
@@ -46,6 +46,8 @@ int main(int arg_count, char **arg_array) {
 		printf("Invalid Options: -h for help.");
 		exit(0);
 	}
+	
+	//printf("Printing %s with %s as delimeter %d times...\n", message, delim, count);
 
 	do_rep(count, delim, message);
 
