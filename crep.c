@@ -5,8 +5,14 @@
 
 void print_usage() {
 	printf("Usage: crep -c 2 -d , \"Hello World\"\n");
-	printf("\nOptions:\n\t-c: for count to specify number of times message should be repeated.\n\t-d: for delimeter to print between message.");
-	printf("\n\nNOTE: message should be given as last argument.\n\teg. `crep -c 3 -d , hello world` will only take world as message value.");
+
+	printf("\nOptions:\n\t-c: for count to specify \
+	number of times message should be repeated.\n\t-d: \
+	for delimeter to print between message.");
+
+	printf("\n\nNOTE: message should be given as last \
+	argument.\n\teg. `crep -c 3 -d , hello world` will \
+	only take world as message value.");
 }
 
 void do_rep(int count, char* delim, char* message) {
@@ -24,7 +30,7 @@ int main(int arg_count, char **arg_array) {
 	opterr = 0;
 	int opt, count;
 	char *delim="", *message;
-	while((opt = getopt(arg_count, arg_array, "d:c:h")) != -1) {
+	while((opt = getopt(arg_count, arg_array, "d::c:h")) != -1) {
 		switch (opt) {
 			case 'd':
 				delim = optarg;
@@ -42,12 +48,15 @@ int main(int arg_count, char **arg_array) {
 	}
 	message = arg_array[arg_count-1];
 
-	if(delim == NULL || count<=0) {
+	if(count<=0) {
+		delim = "";
 		printf("Invalid Options: -h for help.");
 		exit(0);
 	}
-	
-	//printf("Printing %s with %s as delimeter %d times...\n", message, delim, count);
+
+	if(delim == NULL) {
+		delim = "";
+	}
 
 	do_rep(count, delim, message);
 
